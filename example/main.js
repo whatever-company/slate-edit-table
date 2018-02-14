@@ -4,13 +4,13 @@
 
 import * as React from 'react';
 import ReactDOM from 'react-dom';
-import { type Node } from 'slate';
+import { Changes, type Node } from 'slate';
 import { Editor } from 'slate-react';
 
 import PluginEditTable from '../lib/';
 import INITIAL_VALUE from './value';
 
-const tablePlugin = PluginEditTable();
+const tablePlugin = PluginEditTable({ allowBlocksInCells: true });
 const plugins = [tablePlugin];
 
 type NodeProps = {
@@ -47,6 +47,14 @@ function renderNode(props: NodeProps): React.Node {
             return <p {...attributes}>{children}</p>;
         case 'heading':
             return <h1 {...attributes}>{children}</h1>;
+        case 'image':
+            return (
+                <img
+                    {...attributes}
+                    src="https://www.placehold.it/50x50"
+                    alt="test"
+                />
+            );
         default:
             return null;
     }
@@ -77,6 +85,7 @@ class Example extends React.Component<*, *> {
                 <button onMouseDown={e => this.onSetAlign(e, 'right')}>
                     Set align right
                 </button>
+                <button onMouseDown={this.onInsertImage}>Insert Image</button>
             </div>
         );
     }
@@ -132,6 +141,11 @@ class Example extends React.Component<*, *> {
     onSetAlign = (event, align) => {
         event.preventDefault();
         this.submitChange(tablePlugin.changes.setColumnAlign, align);
+    };
+
+    onInsertImage = event => {
+        event.preventDefault();
+        this.submitChange(Changes.insertBlock, { type: 'image', isVoid: true });
     };
 
     render() {
