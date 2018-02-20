@@ -86,23 +86,29 @@ class Paragraph extends React.Component<NodeProps> {
     }
 }
 
-const schema = {
-    nodes: {
-        table: Table,
-        table_row: TableRow,
-        table_cell: TableCell,
-        paragraph: Paragraph,
-        heading: ({ attributes, children }: *) => (
-            <h1 {...attributes}>{children}</h1>
-        )
-    }
-};
 
 class Example extends React.Component<*, *> {
     submitChange: Function;
     editorREF: Editor;
-    value = {
+    state = {
         value: INITIAL_VALUE
+    };
+
+    renderNode = props => {
+        switch (props.node.type) {
+            case 'table':
+                return <Table {...props} />;
+            case 'table_row':
+                return <TableRow {...props} />;
+            case 'table_cell':
+                return <TableCell {...props} />;
+            case 'paragraph':
+                return <Paragraph {...props} />;
+            case 'heading':
+                return <h1 {...props.attributes}>{props.children}</h1>;
+            default:
+                return <span>miaow</span>;
+        }
     };
 
     renderTableToolbar() {
@@ -184,7 +190,7 @@ class Example extends React.Component<*, *> {
     };
 
     render() {
-        const { value } = this.value;
+        const { value } = this.state;
         const isInTable = tablePlugin.utils.isSelectionInTable(value);
         const isOutTable = tablePlugin.utils.isSelectionOutOfTable(value);
 
@@ -195,7 +201,7 @@ class Example extends React.Component<*, *> {
                 <Editor
                     ref={this.setEditorComponent}
                     placeholder={'Enter some text...'}
-                    schema={schema}
+                    renderNode={this.renderNode}
                     plugins={plugins}
                     value={value}
                     onChange={this.onChange}
