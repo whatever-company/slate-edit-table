@@ -10,7 +10,7 @@ import { Editor } from 'slate-react';
 
 import PluginEditTable from '../lib/';
 import alignPlugin from './aligns';
-import INITIAL_STATE from './state';
+import INITIAL_VALUE from './value';
 
 const tablePlugin = PluginEditTable({
     typeTable: 'table',
@@ -101,8 +101,8 @@ const schema = {
 class Example extends React.Component<*, *> {
     submitChange: Function;
     editorREF: Editor;
-    state = {
-        state: INITIAL_STATE
+    value = {
+        value: INITIAL_VALUE
     };
 
     renderTableToolbar() {
@@ -140,9 +140,9 @@ class Example extends React.Component<*, *> {
         this.submitChange = ref.change;
     };
 
-    onChange = ({ state }) => {
-        this.setState({
-            state
+    onChange = ({ value }) => {
+        this.setvalue({
+            value
         });
     };
 
@@ -184,9 +184,9 @@ class Example extends React.Component<*, *> {
     };
 
     render() {
-        const { state } = this.state;
-        const isInTable = tablePlugin.utils.isSelectionInTable(state);
-        const isOutTable = tablePlugin.utils.isSelectionOutOfTable(state);
+        const { value } = this.value;
+        const isInTable = tablePlugin.utils.isSelectionInTable(value);
+        const isOutTable = tablePlugin.utils.isSelectionOutOfTable(value);
 
         return (
             <div>
@@ -197,7 +197,7 @@ class Example extends React.Component<*, *> {
                     placeholder={'Enter some text...'}
                     schema={schema}
                     plugins={plugins}
-                    state={state}
+                    value={value}
                     onChange={this.onChange}
                 />
             </div>

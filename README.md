@@ -40,7 +40,7 @@ const plugins = [
 Here is what your Slate document containing tables should look like:
 
 ```jsx
-<state><document>
+<value><document>
   <paragraph>Some text</paragraph>
 
   <table>
@@ -64,7 +64,7 @@ Here is what your Slate document containing tables should look like:
       </table_cell>
     </table_row>
   </table>
-</document></state>
+</document></value>
 ```
 
 ## `Options`
@@ -92,19 +92,19 @@ An instance of `TablePosition` represents a position within a table (row and col
 
 ### `utils.isSelectionInTable`
 
-`isSelectionInTable(state: Slate.State) => boolean`
+`isSelectionInTable(value: Slate.Value) => boolean`
 
 Return true if selection is inside a table cell.
 
 ### `utils.isSelectionOutOfTable`
 
-`isSelectionOutOfTable(state: Slate.State) => boolean`
+`isSelectionOutOfTable(value: Slate.Value) => boolean`
 
-Return true if selection starts and ends both outside any table.  (Notice: it is NOT the opposite state of `isSelectionInTable`)
+Return true if selection starts and ends both outside any table.  (Notice: it is NOT the opposite value of `isSelectionInTable`)
 
 ### `utils.getPosition`
 
-`getPosition(state: Slate.State) => TablePosition`
+`getPosition(value: Slate.Value) => TablePosition`
 
 Returns the detailed position in the current table.
 
@@ -211,6 +211,6 @@ Move the selection by the given amount of columns and rows.
 Sets column alignment for a given column (`at`), in the current table. `align`
 defaults to center, `at` is optional and defaults to current cursor position.
 
-> The `align` states are stored in the table node's data.
+> The `align` values are stored in the table node's data.
 > `table.node.data.get('align')` should be an array of aligns string, corresponding to
 each column.

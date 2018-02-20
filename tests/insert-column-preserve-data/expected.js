@@ -2,9 +2,9 @@
 import hyperscript from '../hyperscript';
 
 export default (
-    <state>
+    <value>
         <document>
-            <table custom="state">
+            <table custom="value">
                 <table_row>
                     <table_cell>
                         <paragraph>Col 0, Row 0</paragraph>
@@ -40,5 +40,5 @@ export default (
                 </table_row>
             </table>
         </document>
-    </state>
+    </value>
 );

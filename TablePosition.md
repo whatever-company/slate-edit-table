@@ -1,7 +1,7 @@
 # `EditTable.TablePosition`
 
 An instance of `TablePosition` represents a position within a table (row and column).
-You can get your current position in a table by using `plugin.utils.getPosition(state)`.
+You can get your current position in a table by using `plugin.utils.getPosition(value)`.
 
 ## `position.getWidth() => number`
 

@@ -12,8 +12,8 @@ const h = createHyperscript({
     }
 });
 
-const state = (
-    <state>
+const value = (
+    <value>
         <document>
             <heading>Slate + Table Edition</heading>
             <paragraph>
@@ -50,7 +50,7 @@ const state = (
                 go to next row. Press Up/Down to navigate the rows.
             </paragraph>
         </document>
-    </state>
+    </value>
 );
 
-export default state;
+export default value;

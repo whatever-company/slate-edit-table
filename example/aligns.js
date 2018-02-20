@@ -17,7 +17,7 @@ const tablePlugin = PluginEditTable({
  * Set align data for the current column
  */
 function setColumnAlign(change: Change, align: string): Change {
-    const pos = tablePlugin.utils.getPosition(change.state);
+    const pos = tablePlugin.utils.getPosition(change.value);
     const columnCells = tablePlugin.utils.getCellsAtColumn(
         pos.table,
         pos.getColumnIndex()
