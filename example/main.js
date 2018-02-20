@@ -141,7 +141,7 @@ class Example extends React.Component<*, *> {
     };
 
     onChange = ({ value }) => {
-        this.setvalue({
+        this.setState({
             value
         });
     };
