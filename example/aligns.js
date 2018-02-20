@@ -30,28 +30,28 @@ function setColumnAlign(change: Change, align: string): Change {
 
 const alignPlugin = {
     schema: {
-        rules: [
-            // Enforce cells to have alignment data
-            {
-                match(node: Node) {
-                    return node.object == 'block' && node.type == 'table_cell';
-                },
-                validate(cell: Node) {
-                    return (
-                        ['left', 'center', 'right'].indexOf(
-                            cell.data.get('align')
-                        ) === -1
-                    );
-                },
-                normalize(change: Change, cell: Node) {
-                    return change.setNodeByKey(cell.key, {
-                        data: {
-                            align: 'left'
-                        }
-                    });
-                }
-            }
-        ]
+        // rules: [
+        //     // Enforce cells to have alignment data
+        //     {
+        //         match(node: Node) {
+        //             return node.object == 'block' && node.type == 'table_cell';
+        //         },
+        //         validate(cell: Node) {
+        //             return (
+        //                 ['left', 'center', 'right'].indexOf(
+        //                     cell.data.get('align')
+        //                 ) === -1
+        //             );
+        //         },
+        //         normalize(change: Change, cell: Node) {
+        //             return change.setNodeByKey(cell.key, {
+        //                 data: {
+        //                     align: 'left'
+        //                 }
+        //             });
+        //         }
+        //     }
+        // ]
     },
 
     changes: {

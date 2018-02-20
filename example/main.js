@@ -9,7 +9,7 @@ import { type Block } from 'slate';
 import { Editor } from 'slate-react';
 
 import PluginEditTable from '../lib/';
-import alignPlugin from './aligns';
+// import alignPlugin from './aligns';
 import INITIAL_VALUE from './value';
 
 const tablePlugin = PluginEditTable({
@@ -19,7 +19,7 @@ const tablePlugin = PluginEditTable({
     typeContent: 'paragraph'
 });
 
-const plugins = [tablePlugin, alignPlugin];
+const plugins = [tablePlugin];
 
 type NodeProps = {
     attributes: Object,
