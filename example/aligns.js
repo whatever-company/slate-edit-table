@@ -34,7 +34,7 @@ const alignPlugin = {
             // Enforce cells to have alignment data
             {
                 match(node: Node) {
-                    return node.kind == 'block' && node.type == 'table_cell';
+                    return node.object == 'block' && node.type == 'table_cell';
                 },
                 validate(cell: Node) {
                     return (
