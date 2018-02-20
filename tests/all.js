@@ -6,16 +6,8 @@ import readMetadata from 'read-metadata';
 
 import EditTable from '../lib';
 
-const PLUGIN = EditTable();
-const SCHEMA = Slate.Schema.create({
-    plugins: [PLUGIN]
-});
-
-function deserializeValue(json) {
-    return Slate.Value.fromJSON(
-        { ...json, schema: SCHEMA },
-        { normalize: false }
-    );
+function deserializeValue(json, schema) {
+    return Slate.Value.fromJSON({ ...json, schema }, { normalize: false });
 }
 
 describe('slate-edit-table', () => {
@@ -31,12 +23,20 @@ describe('slate-edit-table', () => {
             const expected =
                 fs.existsSync(expectedPath) && readMetadata.sync(expectedPath);
 
-            // eslint-disable-next-line
+            /* eslint-disable global-require, import/no-dynamic-require */
             const runChange = require(path.resolve(dir, 'change.js')).default;
+            const pluginOptions =
+                require(path.resolve(dir, 'change.js')).pluginOptions || {};
+            /* eslint-enable */
 
-            const valueInput = deserializeValue(input);
+            const plugin = EditTable(pluginOptions);
+            const schema = Slate.Schema.create({
+                plugins: [plugin]
+            });
 
-            const newChange = runChange(PLUGIN, valueInput.change());
+            const valueInput = deserializeValue(input, schema);
+
+            const newChange = runChange(plugin, valueInput.change());
 
             if (expected) {
                 const newDocJSon = newChange.value.toJSON();
